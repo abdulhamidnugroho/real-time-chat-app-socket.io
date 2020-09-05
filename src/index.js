@@ -20,9 +20,13 @@ io.on('connection', (socket) => {
     
     socket.emit('message', 'Welcome!')
     socket.broadcast.emit('message', 'A new user has joined!')
-
+    
     socket.on('sendMessage', (message) => {
         io.emit('message', message)
+    })
+
+    socket.on('sendLocation', (coords) => {
+        io.emit('message', `https://google.com/maps?q=${coords.latitude},${coords.longtitude}`)
     })
 
     socket.on('disconnect', () => {
